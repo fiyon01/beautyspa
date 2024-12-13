@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beauty Spa - Services</title>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Axios CDN-->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    main {
+      flex: 1;
+    }
+  </style>
+</head>
+<body class="font-sans text-gray-900">
+  <%- include('partials/header') %>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white text-center py-24">
+    <div class="absolute inset-0 opacity-30">
+      <img src="https://source.unsplash.com/1600x900/?spa,relaxation" alt="Spa" class="w-full h-full object-cover">
+    </div>
+    <div class="relative max-w-7xl mx-auto px-6 sm:px-8">
+      <h1 class="text-5xl font-bold leading-tight"data-aos="slide-left" >Indulge in Luxury and Relaxation</h1>
+      <p class="mt-4 text-lg"data-aos="slide-left" data-aos-delay="100">Explore our exclusive spa services designed to rejuvenate your mind, body, and soul.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <section class="py-16 bg-gray-50" id="services">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8">
+            <h2 class="text-3xl font-bold text-gray-800 text-center">Our Services</h2>
+            <p class="mt-4 text-gray-600 text-center">Choose from a range of luxurious treatments and book your session today.</p>
+    
+            <% if (results.length === 0) { %>
+                <h2 class="text-3xl font-bold text-gray-800 text-center">No services found</h2>
+            <% } else { %>
+                <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <% results.forEach(service => { %>
+                        <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition-all transform hover:scale-105" data-aos="fade-up">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4 hover:text-pink-600 transition-all duration-300"><%= service.service_name %></h3>
+                            <p class="mt-2 text-gray-600 mb-4"><%= service.description %></p>
+                            <p class="mt-4 text-xl font-semibold text-gray-900">Price: Ksh <%= service.price %></p> <!-- Displaying price in Ksh -->
+                            <button 
+                    class="mt-4 bg-pink-500 text-white px-6 py-2 rounded-md hover:bg-pink-600 booking-btn" 
+                    data-service-id="<%= service.id %>"  data-price="<%= service.price %>">
+                    Book Now
+                  </button>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+        </div>
+    </section>
+    
+
+   <!-- Additional Features Section -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+      <h2 class="text-3xl font-bold text-gray-800 text-center">Why Choose Us?</h2>
+      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature Cards -->
+        <div class="bg-gray-100 shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-all transform hover:scale-105" data-aos="slide-up">
+          <div class="text-pink-500 mb-4">
+            <!-- Icon for Experienced Therapists -->
+            <i class="fas fa-user-md fa-3x"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800">Experienced Therapists</h3>
+          <p class="mt-2 text-gray-600">Highly trained professionals dedicated to exceptional care.</p>
+        </div>
+  
+        <div class="bg-gray-100 shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-all transform hover:scale-105" data-aos="slide-up" data-aos-delay="100">
+          <div class="text-pink-500 mb-4">
+            <!-- Icon for Luxurious Ambiance -->
+            <i class="fas fa-spa fa-3x"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800">Luxurious Ambiance</h3>
+          <p class="mt-2 text-gray-600">Relax in a serene and calming environment.</p>
+        </div>
+  
+        <div class="bg-gray-100 shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-all transform hover:scale-105" data-aos="slide-up" data-aos-delay="200">
+          <div class="text-pink-500 mb-4">
+            <!-- Icon for Affordable Packages -->
+            <i class="fas fa-tags fa-3x"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800">Affordable Packages</h3>
+          <p class="mt-2 text-gray-600">Premium experiences at unbeatable prices.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+   <!-- Testimonials Section -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+      <h2 class="text-3xl font-bold text-gray-800 text-center">What Our Clients Say</h2>
+      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Testimonial Cards -->
+        <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition-all transform hover:scale-105" data-aos="fade-up">
+          <div class="text-yellow-500 mb-4">
+            <!-- Star Rating Icon -->
+            <i class="fas fa-star fa-lg"></i>
+            <i class="fas fa-star fa-lg"></i>
+            <i class="fas fa-star fa-lg"></i>
+            <i class="fas fa-star fa-lg"></i>
+            <i class="fas fa-star-half-alt fa-lg"></i>
+          </div>
+          <p class="text-gray-600">"The best spa experience I have ever had. Highly recommended!"</p>
+          <h3 class="mt-4 text-sm font-semibold text-gray-800">- Sarah J.</h3>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition-all transform hover:scale-105" data-aos="fade-up" data-aos-delay="100">
+          <div class="text-yellow-500 mb-4">
+            <!-- Star Rating Icon -->
+            <i class="fas fa-star fa-lg"></i>
+            <i class="fas fa-star fa-lg"></i>
+            <i class="fas fa-star fa-lg"></i>
+            <i class="fas fa-star-half-alt fa-lg"></i>
+            <i class="fas fa-star-half-alt fa-lg"></i>
+          </div>
+          <p class="text-gray-600">"Professional staff and luxurious ambiance. Loved it!"</p>
+          <h3 class="mt-4 text-sm font-semibold text-gray-800">- Emily T.</h3>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition-all transform hover:scale-105" data-aos="fade-up" data-aos-delay="200">
+          <div class="text-yellow-500 mb-4">
+            <!-- Star Rating Icon -->
+            <i class="fas fa-star fa-lg"></i>
+            <i class="fas fa-star fa-lg"></i>
+            <i class="fas fa-star fa-lg"></i>
+            <i class="fas fa-star fa-lg"></i>
+            <i class="fas fa-star fa-lg"></i>
+          </div>
+          <p class="text-gray-600">"Affordable and worth every penny. Will come again!"</p>
+          <h3 class="mt-4 text-sm font-semibold text-gray-800">- Rachel K.</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white">
+      <div class="max-w-7xl mx-auto px-6 sm:px-8 text-center">
+        <h2 class="text-3xl font-bold">Stay Updated</h2>
+        <p class="mt-4">Subscribe to our newsletter for exclusive offers and updates.</p>
+        <form class="mt-6 flex justify-center">
+          <input type="email" placeholder="Enter your email" class="p-3 rounded-l-md w-72">
+          <button type="submit" class="bg-white text-pink-500 font-bold px-6 py-3 rounded-r-md hover:bg-pink-200">Subscribe</button>
+        </form>
+      </div>
+    </section>
+  </main>
+<!-- Booking Form (Popup) -->
+<div id="booking-form-popup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg w-96 p-6 relative">
+      <button id="close-popup" class="absolute top-3 right-3 text-gray-600 hover:text-gray-800">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <h3 class="text-xl font-bold text-gray-800">Book Your Session</h3>
+      <form id="booking-form" class="mt-4 space-y-4">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" id="name" name="name" class="w-full mt-1 p-2 border rounded-md" placeholder="Your Name" required>
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="email" name="email" class="w-full mt-1 p-2 border rounded-md" placeholder="Your Email">
+        </div>
+        <div>
+            <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+            <input type="text" id="phone" name="phone" class="w-full mt-1 p-2 border rounded-md" placeholder="Your Name" required>
+          </div>
+        <div>
+          <label for="date" class="block text-sm font-medium text-gray-700">Preferred Date</label>
+          <input type="date" id="date" name="date" class="w-full mt-1 p-2 border rounded-md" required>
+        </div>
+        <div>
+          <label for="time" class="block text-sm font-medium text-gray-700">Preferred Time</label>
+          <input type="time" id="time" name="time" class="w-full mt-1 p-2 border rounded-md" required>
+        </div>
+        <button type="submit" class="bg-pink-500 text-white px-6 py-2 rounded-md hover:bg-pink-600 w-full">Submit Booking</button>
+      </form>
+    </div>
+  </div>
+  <!-- Success Modal -->
+<div id="successModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white p-8 rounded-lg shadow-xl w-80 sm:max-w-md">
+      <div class="flex justify-center">
+        <i class="fas fa-check-circle text-green-600 text-4xl animate-bounce"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-green-600 mt-4">Booking Successful!</h3>
+      <p class="text-gray-700 mt-2">
+        Your appointment has been successfully created. Please check your email for confirmation message.
+      </p>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-6">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 text-center">
+      <p>&copy; 2024 Beauty Bliss Spa. All rights reserved.</p>
+    </div>
+  </footer>
+  <!-- JavaScript -->
+  <script>
+    AOS.init();
+  </script>
+  <script>
+    const bookingButtons = document.querySelectorAll('.booking-btn');
+    const bookingFormPopup = document.getElementById('booking-form-popup');
+    const closePopup = document.getElementById('close-popup');
+    const bookingForm = document.getElementById('booking-form');
+    // Close popup
+    closePopup.addEventListener('click', () => {
+      bookingFormPopup.classList.add('hidden');
+    });
+    
+    function showSuccessModal() {
+  const successModal = document.getElementById("successModal");
+  successModal.classList.remove("hidden"); // Show modal
+  setTimeout(()=>{
+    successModal.classList.add("hidden"); // Hide modal after 3 seconds
+  },5000)
+
+  // Handle redirect to login page when the button is clicked
+//   const proceedButton = document.getElementById("proceedButton");
+//   proceedButton.addEventListener("click", function() {
+//     window.location.href = "/employee-login"; // Redirect to login page
+//   });
+}
+    // Toggle mobile menu visibility
+  const menuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  document.querySelectorAll(".booking-btn").forEach(button => {
+  button.addEventListener("click", function() {
+    const serviceId = button.dataset.serviceId; // Get the serviceId from the button
+    const price = button.dataset.price;
+    const bookingFormPopup = document.getElementById('booking-form-popup');
+    const bookingForm = document.getElementById('booking-form');
+    
+    // Show the booking form popup
+    bookingFormPopup.classList.remove('hidden');
+
+    // Listen for form submission once, instead of inside the click handler
+    const handleFormSubmit = async(e) => {
+      e.preventDefault();  // Prevent default form submission
+
+      // Perform validation before proceeding
+      if (!validate()) {
+        return; // If validation fails, stop the process
+      }
+
+      // Collect form data after validation
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const email = document.getElementById("email").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+
+      // Package data
+      const data = { name, phone, email, price, serviceId, date, time };
+      console.log(typeof(price))
+      console.log(data); // Log the form data
+
+      // Send data to the backend via axios
+       
+  try {
+    // Axios POST request
+    const response = await axios.post("/api/booking",data);
+
+    // Response handling
+    if (response.status === 200) {
+      console.log("Booking created:", response.data);
+          
+           // Redirect to the payment page with the appointment ID and deposit
+           const appointmentId = response.data.appointmentId;
+          const deposit = response.data.deposit; // Get the deposit
+
+          window.location.href = `/payment?appointmentId=${appointmentId}&deposit=${deposit}`;
+    } else {
+      console.error("Unexpected response status:", response.status);
+      alert("Something went wrong. Please try again later.");
+    }
+  } catch (error) {
+    // Enhanced error handling
+    console.error("Error occurred:", error.response ? error.response.data : error.message);
+    alert("Error occurred while processing your request.");
+  }
+      // Reset form and hide popup after submission
+      bookingForm.reset();
+      bookingFormPopup.classList.add('hidden');
+    };
+
+    // Attach the form submission handler only once
+    bookingForm.removeEventListener("submit", handleFormSubmit);  // Remove previous handler if exists
+    bookingForm.addEventListener("submit", handleFormSubmit);  // Attach new handler
+
+  });
+});
+
+// Validation function
+const validate = () => {
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const date = document.getElementById('date').value.trim();
+  const time = document.getElementById('time').value.trim();
+
+  // Check if any of the fields are empty
+  if (!name || !email || !phone || !date || !time) {
+    console.log("Fields cannot be empty");
+    alert("Please fill out all required fields.");
+    return false; // Validation failed
+  }
+
+  // Optionally, add format validation for email and phone
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
+  const phoneRegex = /^\d{10}$/; // Example: 10-digit phone number
+
+  if (!emailRegex.test(email)) {
+    console.log("Invalid email format");
+    alert("Please enter a valid email address.");
+    return false;
+  }
+
+  if (!phoneRegex.test(phone)) {
+    console.log("Invalid phone number");
+    alert("Please enter a valid 10-digit phone number.");
+    return false;
+  }
+
+  return true; // Validation passed
+};
+
+
+  </script>
+</body>
+</html>

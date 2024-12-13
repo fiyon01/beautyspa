@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Profile - Beauty Spa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-roboto flex items-center justify-center min-h-screen">
+
+  <div class="w-full max-w-lg sm:max-w-md md:max-w-lg lg:max-w-xl bg-white p-6 sm:p-4 md:p-6 lg:p-8 rounded-lg shadow-lg">
+    <div class="text-center mb-6">
+      <!-- Profile Picture -->
+      <img src="https://via.placeholder.com/150" alt="Profile Picture" class="mx-auto mb-4 w-24 h-24 rounded-full object-cover">
+      <h2 class="text-3xl font-semibold text-gray-800">Employee Name</h2>
+      <p class="text-gray-600 text-sm">Welcome to your profile page!</p>
+    </div>
+
+    <!-- Success message (simulated here as static) -->
+    <div class="mb-4">
+      <div class="text-green-500 text-sm">Profile updated successfully!</div>
+    </div>
+
+    <!-- Profile Form -->
+    <form action="#" method="POST" enctype="multipart/form-data" id="profileForm">
+
+      <!-- Username Field -->
+      <div class="mb-4">
+        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+        <input type="text" id="username" name="username" value="john_doe" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+      </div>
+
+      <!-- Email Field -->
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" id="email" name="email" value="johndoe@example.com" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+      </div>
+
+      <!-- Profile Picture Upload -->
+      <div class="mb-4">
+        <label for="profile_picture" class="block text-sm font-medium text-gray-700">Change Profile Picture</label>
+        <input type="file" id="profile_picture" name="profile_picture" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+      </div>
+
+      <!-- Role Field -->
+      <div class="mb-4">
+        <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+        <input type="text" id="role" name="role" value="Facialist" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" disabled>
+      </div>
+
+      <!-- Skills Section -->
+      <div class="mb-4">
+        <label for="skills" class="block text-sm font-medium text-gray-700">Skills</label>
+        <select id="skills" name="skills" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" multiple>
+          <option value="facial">Facial</option>
+          <option value="pedicure">Pedicure</option>
+          <option value="manicure">Manicure</option>
+          <option value="massage">Massage</option>
+          <option value="hair_styling">Hair Styling</option>
+        </select>
+      </div>
+
+      <!-- Availability Status -->
+      <div class="mb-4">
+        <label for="availability_status" class="block text-sm font-medium text-gray-700">Availability Status</label>
+        <select id="availability_status" name="availability_status" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <option value="available">Available</option>
+          <option value="busy">Busy</option>
+          <option value="on_leave">On Leave</option>
+        </select>
+      </div>
+
+      <!-- Bio Section -->
+      <div class="mb-4">
+        <label for="bio" class="block text-sm font-medium text-gray-700">Additional Bio</label>
+        <textarea id="bio" name="bio" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Tell us more about your experience and skills..."></textarea>
+      </div>
+
+      <!-- Password Change Section -->
+      <div class="mb-4">
+        <label for="password" class="block text-sm font-medium text-gray-700">Change Password</label>
+        <input type="password" id="password" name="password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Enter new password">
+      </div>
+
+      <div class="mb-4">
+        <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
+        <input type="password" id="confirm_password" name="confirm_password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Confirm new password">
+      </div>
+
+      <!-- Security Settings Section -->
+      <div class="mb-4">
+        <label for="security_question" class="block text-sm font-medium text-gray-700">Security Question</label>
+        <select id="security_question" name="security_question" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <option value="mother_maiden_name">What is your mother's maiden name?</option>
+          <option value="first_pet_name">What was the name of your first pet?</option>
+          <option value="city_born">In what city were you born?</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="security_answer" class="block text-sm font-medium text-gray-700">Security Answer</label>
+        <input type="text" id="security_answer" name="security_answer" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Answer to security question">
+      </div>
+
+      <!-- Account Deactivation Section -->
+      <div class="mb-4">
+        <p class="text-sm text-red-500">If you wish to deactivate your account, please click the button below. This will temporarily suspend your account.</p>
+        <button type="button" class="w-full py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300 mt-2">Deactivate Account</button>
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button type="submit" id="saveChangesButton" class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition duration-300 relative">
+          <span id="buttonText">Save Changes</span>
+          <svg id="loader" class="absolute inset-0 w-6 h-6 mx-auto my-auto text-white animate-spin hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="12" cy="12" r="10" stroke-width="4" stroke="currentColor" opacity="0.25" />
+            <path d="M4 12a8 8 0 1 1 16 0A8 8 0 0 1 4 12z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Logout Button -->
+  <div class="mt-6">
+    <button type="button" id="logoutButton" class="w-full py-3 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 transition duration-300">Logout</button>
+  </div>
+</form>
+</div>
+
+<!-- Logout Confirmation Modal -->
+<div id="logoutModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 hidden">
+<div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+  <h3 class="text-xl font-semibold text-gray-800">Are you sure you want to log out?</h3>
+  <div class="mt-4 flex justify-between">
+    <button id="cancelLogout" class="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500">Cancel</button>
+    <button id="confirmLogout" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Logout</button>
+  </div>
+</div>
+    </form>
+
+  </div>
+
+  
+<script>
+    // Get the elements
+const saveChangesButton = document.getElementById('saveChangesButton');
+const loader = document.getElementById('loader');
+const buttonText = document.getElementById('buttonText');
+const form = document.getElementById('profileForm');
+
+// On form submit, show the loader and hide the button text
+form.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the form from submitting immediately for demo purpose
+
+  // Show loader, hide button text
+  loader.classList.remove('hidden');
+  buttonText.classList.add('hidden');
+
+  // Simulate a network request with a timeout (e.g., save to the server)
+  setTimeout(function() {
+    // Hide loader, show button text again after processing is complete
+    loader.classList.add('hidden');
+    buttonText.classList.remove('hidden');
+
+    // After the "processing" is done, you can submit the form, for example:
+    // form.submit(); // Uncomment this to actually submit the form after the demo
+  }, 3000); // Simulating a 3-second delay for demonstration
+});
+// Get modal and buttons
+const logoutButton = document.getElementById('logoutButton');
+  const logoutModal = document.getElementById('logoutModal');
+  const cancelLogout = document.getElementById('cancelLogout');
+  const confirmLogout = document.getElementById('confirmLogout');
+
+  // Show modal when logout button is clicked
+  logoutButton.addEventListener('click', () => {
+    logoutModal.classList.remove('hidden');
+  });
+
+  // Close modal when cancel button is clicked
+  cancelLogout.addEventListener('click', () => {
+    logoutModal.classList.add('hidden');
+  });
+
+  // Perform logout action and close modal when confirm button is clicked
+  confirmLogout.addEventListener('click', () => {
+    // Perform logout logic here (e.g., redirect to login page or clear session)
+    alert('Logging out...');
+    window.location.href = '/login'; // Redirect to login page after logout
+  });
+
+  // Close modal if clicked outside
+  window.addEventListener('click', (e) => {
+    if (e.target === logoutModal) {
+      logoutModal.classList.add('hidden');
+    }
+  });
+</script>
+</body>
+</html>

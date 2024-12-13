@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Bookings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center">My Bookings</h1>
+    
+    <!-- Booking List -->
+    <div id="bookings" class="space-y-4">
+      <!-- Placeholder for bookings -->
+      <p class="text-center text-gray-600">Loading your bookings...</p>
+    </div>
+  </div>
+
+  <script>
+    // Simulate API data for bookings
+    const bookingsData = [
+      { id: 1, spaName: "Relax & Glow Spa", date: "2024-12-12", time: "2:00 PM" },
+      { id: 2, spaName: "Blissful Touch Spa", date: "2024-12-15", time: "10:00 AM" },
+    ];
+
+    const bookingsContainer = document.getElementById('bookings');
+
+    // Render bookings dynamically
+    function renderBookings() {
+      if (bookingsData.length === 0) {
+        bookingsContainer.innerHTML = `<p class="text-center text-gray-600">You have no bookings.</p>`;
+        return;
+      }
+
+      bookingsContainer.innerHTML = bookingsData.map(booking => `
+        <div class="bg-white shadow-md rounded-lg p-4 flex justify-between items-center">
+          <div>
+            <h2 class="text-xl font-semibold">${booking.spaName}</h2>
+            <p class="text-sm text-gray-600">Date: ${booking.date}</p>
+            <p class="text-sm text-gray-600">Time: ${booking.time}</p>
+          </div>
+          <button 
+            onclick="cancelBooking(${booking.id})" 
+            class="bg-red-500 hover:bg-red-600 text-white text-sm py-2 px-4 rounded">
+            Cancel
+          </button>
+        </div>
+      `).join('');
+    }
+
+    // Handle cancel booking
+    function cancelBooking(bookingId) {
+      if (confirm("Are you sure you want to cancel this booking?")) {
+        const bookingIndex = bookingsData.findIndex(b => b.id === bookingId);
+        if (bookingIndex > -1) {
+          bookingsData.splice(bookingIndex, 1); // Remove booking
+          renderBookings(); // Re-render bookings
+          alert("Booking canceled successfully.");
+        }
+      }
+    }
+
+    // Initial render
+    renderBookings();
+  </script>
+</body>
+</html>

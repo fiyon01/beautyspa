@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beauty Spa - Employee Login</title>
+  <!-- Axios CDN-->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for a more polished look -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome CDN for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+</head>
+<body class="bg-gray-50 font-roboto flex items-center justify-center min-h-screen">
+
+  <!-- Login Form Container -->
+  <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm sm:max-w-md md:max-w-lg transition-transform transform hover:scale-105">
+    <div class="text-center mb-6">
+      <img src="https://via.placeholder.com/150" alt="Beauty Spa Logo" class="mx-auto mb-4 w-20 h-20 object-cover rounded-full">
+      <h2 class="text-3xl font-bold text-gray-800">Employee Login</h2>
+      <p class="text-gray-600 text-sm">Please enter your credentials to log in.</p>
+    </div>
+
+    <!-- Login Form -->
+    <form class="space-y-6" id="login-form" onsubmit="handleLogin(event)">
+      <!-- Email Field -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <div class="relative">
+          <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300" placeholder="Enter your email (e.g., employee@beautyspa.com)">
+          <i class="fas fa-envelope absolute top-3 right-3 text-gray-400"></i>
+        </div>
+      </div>
+
+      <!-- Password Field with Toggle -->
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <div class="relative">
+          <input type="password" id="password" name="password" required class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300" placeholder="Enter your password">
+          <i id="togglePassword" class="fas fa-eye absolute top-3 right-3 text-gray-400 cursor-pointer" onclick="togglePasswordVisibility()"></i>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button type="submit" class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition duration-300 transform hover:scale-105">
+          <i class="fas fa-sign-in-alt mr-2"></i>Login
+        </button>
+      </div>
+    </form>
+
+    <div class="text-center mt-6">
+      <p class="text-sm text-gray-600">Don't have an account? <a href="/employee/register" class="text-indigo-600 hover:underline">Register</a></p>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="errorModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+      <div class="bg-white p-8 rounded-lg shadow-xl w-80 sm:max-w-md">
+        <div class="flex justify-center">
+          <i class="fas fa-times-circle text-red-600 text-4xl animate-shake"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-red-600 mt-4">Login Failed</h3>
+        <p class="text-gray-700 mt-2">Incorrect email or password. Please try again.</p>
+        <div class="mt-4 flex justify-center">
+          <button id="closeErrorButton" class="px-6 py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 transition duration-300">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Handle form submission
+    function handleLogin(event) {
+      event.preventDefault(); // Prevent the form from submitting normally
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      // Send data to the backend using Axios
+      axios.post('/api/employee-login', {
+        email: email,
+        password: password
+      })
+      .then(response => {
+        // Handle success (e.g., redirect to the dashboard or show success message)
+        console.log('Login successful:', response.data);
+        // You can store the token in localStorage or cookie for future use
+        localStorage.setItem('token', response.data.token);
+        window.location.href = '/employee/dashboard'; // Redirect to dashboard or another page
+      })
+      .catch(error => {
+        // Handle error (e.g., show error modal)
+        console.error('Login failed:', error);
+        document.getElementById('errorModal').classList.remove('hidden');
+      });
+    }
+
+    // Close error modal
+    document.getElementById('closeErrorButton').addEventListener('click', () => {
+      document.getElementById('errorModal').classList.add('hidden');
+    });
+
+    // Toggle password visibility
+    function togglePasswordVisibility() {
+      const passwordField = document.getElementById('password');
+      const toggleIcon = document.getElementById('togglePassword');
+      if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+      } else {
+        passwordField.type = 'password';
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+      }
+    }
+  </script>
+</body>
+</html>

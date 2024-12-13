@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Beauty Spa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-pink-50">
+    <%- include('partials/header') %>
+    <!-- Header Section -->
+    <header class="bg-pink-600 text-white py-6">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h1 class="text-5xl font-bold">Beauty Spa</h1>
+            <p class="text-lg mt-2">Your destination for relaxation and rejuvenation</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-12 space-y-12">
+        <!-- Contact Form and Location -->
+        <div id="contact" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Contact Form -->
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold text-pink-600 mb-6">Get in Touch</h2>
+                <form action="#" method="POST">
+                    <div class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+                            <input type="text" id="name" name="name" required class="mt-1 p-2 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Your Email</label>
+                            <input type="email" id="email" name="email" required class="mt-1 p-2 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                            <textarea id="message" name="message" rows="4" required class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500"></textarea>
+                        </div>
+                        <button type="submit" class="mt-4 w-full bg-pink-600 text-white py-2 px-4 rounded-lg hover:bg-pink-700 transition">Send Message</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Location Section -->
+            <div id="location" class="bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold text-pink-600 mb-6">Our Location</h2>
+                <p class="text-gray-700 mb-4">Visit us at our spa location for an unforgettable experience:</p>
+                <div class="flex items-center space-x-3 mb-4">
+                    <i class="fas fa-map-marker-alt text-pink-600 text-xl"></i>
+                    <p class="text-lg font-medium text-gray-800">338-00902 Kikuyu, Kenya</p>
+                </div>
+
+                <div class="mt-4">
+                    <p class="text-lg font-medium text-gray-800">Business Hours:</p>
+                    <p class="text-gray-600">Monday - Friday: 9:00 AM - 8:00 PM</p>
+                    <p class="text-gray-600">Saturday - Sunday: 10:00 AM - 6:00 PM</p>
+                </div>
+
+                <!-- Google Maps Embed -->
+                <div class="mt-6">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63896.16166840341!2d36.63343722720835!3d-1.2388751287414167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1b7ba734a69f%3A0x6e2c2f9b04690540!2s338-00902%20Kikuyu%2C%20Kenya!5e0!3m2!1sen!2ske!4v1697043456789!5m2!1sen!2ske" 
+                        width="100%" 
+                        height="250" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Services -->
+        <div id="services" class="bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-semibold text-pink-600 mb-6 text-center">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div>
+                    <h3 class="text-xl font-medium text-gray-800">Facials</h3>
+                    <p class="text-gray-600">Rejuvenate your skin with our expert facial treatments.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-medium text-gray-800">Massages</h3>
+                    <p class="text-gray-600">Relax and unwind with a variety of massage options.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-medium text-gray-800">Manicures & Pedicures</h3>
+                    <p class="text-gray-600">Treat your hands and feet to a spa experience.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="bg-pink-100 p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-semibold text-pink-600 mb-6 text-center">What Our Clients Say</h2>
+            <div class="space-y-4">
+                <blockquote class="text-gray-800 italic">"The best spa experience I've ever had! Highly recommend the facial treatments." - <span class="font-bold">Jane Doe</span></blockquote>
+                <blockquote class="text-gray-800 italic">"Amazing massages and great customer service. I'll definitely be back!" - <span class="font-bold">John Smith</span></blockquote>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-pink-600 text-white py-6">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <p>&copy; 2024 Beauty Spa. All rights reserved.</p>
+            <div class="space-x-4 mt-4 md:mt-0">
+                <a href="#" class="hover:underline">Facebook</a>
+                <a href="#" class="hover:underline">Instagram</a>
+                <a href="#" class="hover:underline">Twitter</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Toggle mobile menu visibility
+        const menuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      </script>
+
+</body>
+</html>

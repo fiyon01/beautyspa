@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Beauty Spa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Custom gallery styles */
+    .gallery img {
+         transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Custom section styles */
+    .testimonial-img {
+      transition: transform 0.3s ease;
+    }
+
+    .testimonial-img:hover {
+      transform: scale(1.1);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    /* Hero section background image */
+    .hero {
+      background-image: linear-gradient(to right, rgba(236, 72, 153, 0.7), rgba(139, 92, 246, 0.6), rgba(59, 130, 246, 0.6)), url('/images/360_F_692964701_NffBBEBZv7c5RzPoILnV73YfYtoS1yE4-removebg-preview%20(2).png');
+      background-size: cover;
+      background-position: center;
+      background-repeat:no-repeat;
+      background-attachment:scroll;
+    }
+    #cookie-banner {
+    display: none;
+    animation: slide-up 0.5s ease-in-out;
+  }
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  </style>
+</head>
+<body class="font-sans text-gray-900">
+  <%- include('partials/header') %>
+ <!-- Banner (Hero Section) -->
+<section id="promo" class="hero text-center py-24 lg:py-48 text-white">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-4xl font-bold">Limited Time Offer!</h2>
+      <p class="mt-4 text-lg">Get 20% off all spa treatments this weekend only. Book now and treat yourself!</p>
+      <a href="/services" class="mt-6 inline-block bg-pink-500 text-white px-8 py-3 rounded-md hover:bg-pink-600">Explore our Services</a>
+    </div>
+  </section>
+  
+
+  <!-- Why Choose Us -->
+  <section id="why-choose-us" class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-800"data-aos="slide-left">Why Choose Beauty Bliss Spa?</h2>
+      <p class="mt-4 text-gray-600"data-aos="slide-left" data-aos-delay="100">We provide top-quality services designed to help you relax, rejuvenate, and look your best. Here's why our clients love us:</p>
+      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white shadow-lg rounded-lg p-6"data-aos="slide-up" >
+          <h3 class="text-xl font-bold text-gray-800">Experienced Therapists</h3>
+          <p class="mt-2 text-gray-600">Our licensed therapists are trained in various massage and skincare techniques to give you the best experience possible.</p>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg p-6"data-aos="slide-up" data-aos-delay="100">
+          <h3 class="text-xl font-bold text-gray-800">Luxury Treatments</h3>
+          <p class="mt-2 text-gray-600">We offer a wide range of luxury spa treatments designed to pamper and rejuvenate you.</p>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg p-6"data-aos="slide-up" data-aos-delay="200">
+          <h3 class="text-xl font-bold text-gray-800">Serene Environment</h3>
+          <p class="mt-2 text-gray-600">Our spa offers a calm and relaxing atmosphere, perfect for unwinding and rejuvenating your body and mind.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-800">Gallery</h2>
+      <p class="mt-4 text-gray-600">A glimpse into the Beauty Bliss Spa experience.</p>
+      <div class="gallery mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <img src="https://via.placeholder.com/300" alt="Gallery Image 1" class="w-full rounded-lg shadow-md"data-aos="fade-up" >
+        <img src="https://via.placeholder.com/300" alt="Gallery Image 2" class="w-full rounded-lg shadow-md"data-aos="fade-up" data-aos-delay="100">
+        <img src="https://via.placeholder.com/300" alt="Gallery Image 3" class="w-full rounded-lg shadow-md"data-aos="fade-up" data-aos-delay="200">
+        <img src="/images/mmwJwWnx1rzg2cZFB0wATZZJqTMR4X2DQGM3JVwM.png" alt="Gallery Image 4" class="w-full rounded-lg shadow-md"data-aos="fade-up"data-aos-delay="300">
+        <img src="/images/istockphoto-1331637318-612x612 (2).jpg" alt="Gallery Image 5" class="w-full rounded-lg shadow-md block lg:hidden  object-fill " data-aos="fade-up" data-aos-delay="400">
+        <img src="/images/2021-06-17 (2).jpg" alt="Gallery Image 6" class="w-full rounded-lg shadow-md"data-aos="fade-up"data-aos-delay="500">
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-800">What Our Clients Say</h2>
+      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white shadow-lg rounded-lg p-6"data-aos="fade-up">
+          <img src="/images/client1.webp" alt="Client 1" class="w-20 h-20 rounded-full mx-auto mb-4 testimonial-img">
+          <p class="text-gray-600">"I had the most relaxing experience at Beauty Bliss Spa. The massage was just what I needed!"</p>
+          <h4 class="mt-4 text-gray-800 font-bold">Jane Doe</h4>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg p-6"data-aos="fade-up" data-aos-delay="100">
+          <img src="/images/client3.webp" alt="Client 2" class="w-20 h-20 rounded-full mx-auto mb-4 testimonial-img">
+          <p class="text-gray-600">"The facial treatments were top-notch. My skin has never felt better!"</p>
+          <h4 class="mt-4 text-gray-800 font-bold">Anna Smith</h4>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg p-6"data-aos="fade-up"data-aos-delay="200">
+          <img src="/images/client2.jpg" alt="Client 3" class="w-20 h-20 rounded-full mx-auto mb-4 testimonial-img">
+          <p class="text-gray-600">"A wonderful place to unwind and feel rejuvenated. Highly recommend!"</p>
+          <h4 class="mt-4 text-gray-800 font-bold">Sarah Lee</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-800">Frequently Asked Questions</h2>
+      <div class="mt-12 space-y-4">
+        <div class="faq-item">
+          <h3 class="text-lg font-semibold">What treatments do you offer?</h3>
+          <p class="text-gray-600">We offer a variety of services, including massages, facials, body scrubs, and more.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="text-lg font-semibold">How do I book an appointment?</h3>
+          <p class="text-gray-600">You can easily book an appointment through our website or by calling our spa directly.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="text-lg font-semibold">What should I wear to my appointment?</h3>
+          <p class="text-gray-600">We recommend wearing comfortable clothing. We provide robes and towels during treatments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+ <!-- Cookie Consent Banner -->
+<div id="cookie-banner" class="fixed bottom-0 inset-x-0 bg-pink-200 text-gray-800 py-6 px-8 md:px-12 flex flex-wrap md:flex-nowrap justify-between items-center shadow-lg z-50">
+    <p class="text-sm md:text-base font-light mb-4 md:mb-0">
+      We use cookies to improve your experience and provide a seamless browsing journey. By continuing, you agree to our use of cookies. Choose to accept or reject all.
+    </p>
+    <div class="flex space-x-4">
+      <button id="accept-all" class="bg-pink-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-pink-600 transition duration-200 text-sm md:text-base">
+        Accept All
+      </button>
+      <button id="reject-all" class="bg-gray-400 text-gray-900 px-6 py-2 rounded-lg shadow-md hover:bg-gray-500 transition duration-200 text-sm md:text-base">
+        Reject All
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-pink-500 text-white py-8">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 text-center">
+      <p>&copy; 2024 Beauty Bliss Spa. All Rights Reserved.</p>
+      <div class="mt-4 space-x-6">
+        <a href="#" class="text-white hover:text-gray-200">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" class="text-white hover:text-gray-200">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#" class="text-white hover:text-gray-200">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#" class="text-white hover:text-gray-200">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    AOS.init();
+  </script>
+  <script>
+ 
+
+      // JavaScript to handle cookie consent
+  document.getElementById('accept-all').addEventListener('click', () => {
+    setCookie('cookieConsent', 'accepted', 365); // Set a cookie for acceptance
+    hideBanner();
+  });
+
+  document.getElementById('reject-all').addEventListener('click', () => {
+    setCookie('cookieConsent', 'rejected', 365); // Set a cookie for rejection
+    hideBanner();
+  });
+
+  function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+  }
+
+  function hideBanner() {
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
+
+  function checkCookieConsent() {
+    const cookies = document.cookie.split('; ').reduce((acc, cookie) => {
+      const [name, value] = cookie.split('=');
+      acc[name] = value;
+      return acc;
+    }, {});
+    return cookies['cookieConsent'];
+  }
+
+  // Show banner only if no prior consent is given
+  if (!checkCookieConsent()) {
+    document.getElementById('cookie-banner').style.display = 'flex';
+  } else {
+    hideBanner();
+  }
+  // Toggle mobile menu visibility
+  const menuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Beauty Spa Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <style>
+    .menu-toggle {
+      display: none;
+    }
+    @media (max-width: 1024px) {
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+<!-- Christmas Banner with Emoji -->
+<section class="relative bg-red-600 text-white py-12 text-center flex justify-center items-center lg:ml-64 mt-12 overflow-hidden">
+    <!-- Snowflakes -->
+    <div class="absolute inset-0 pointer-events-none snowflakes">
+      <div class="snowflake">❄️</div>
+      <div class="snowflake">❄️</div>
+      <div class="snowflake">❄️</div>
+      <div class="snowflake">❄️</div>
+      <div class="snowflake">❄️</div>
+      <div class="snowflake">❄️</div>
+    </div>
+  
+    <!-- Animated Christmas Tree -->
+    <span class="text-4xl animate-wiggle">🎄</span>
+    
+    <!-- Text -->
+    <h2 class="text-3xl font-bold mx-2 animate-fade-in">
+      Merry Christmas! Special Holiday Discounts Available!
+    </h2>
+    
+    <!-- Gift -->
+    <span class="text-4xl animate-bounce">🎁</span>
+  </section>
+  
+  <!-- Tailwind CSS Config Extensions -->
+  <style>
+    /* Snowflake animation */
+    @keyframes snowfall {
+      0% {
+        transform: translateY(-100vh) translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) translateX(10vw);
+        opacity: 0;
+      }
+    }
+  
+    .snowflakes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+  
+    .snowflake {
+      position: absolute;
+      top: -2em;
+      width: 1em;
+      height: 1em;
+      color: white;
+      font-size: 1.5rem;
+      animation: snowfall 10s linear infinite;
+      opacity: 0;
+    }
+  
+    /* Randomize snowflake positions */
+    .snowflake:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .snowflake:nth-child(2) { left: 30%; animation-delay: 2s; }
+    .snowflake:nth-child(3) { left: 50%; animation-delay: 4s; }
+    .snowflake:nth-child(4) { left: 70%; animation-delay: 1s; }
+    .snowflake:nth-child(5) { left: 90%; animation-delay: 3s; }
+    .snowflake:nth-child(6) { left: 20%; animation-delay: 5s; }
+  
+    /* Wiggle animation for the tree */
+    @keyframes wiggle {
+      0%, 100% {
+        transform: rotate(-5deg);
+      }
+      50% {
+        transform: rotate(5deg);
+      }
+    }
+  
+    .animate-wiggle {
+      animation: wiggle 1s ease-in-out infinite;
+    }
+  </style>
+  
+  <h2 class="text-2xl font-bold text-gray-800 mt-4">
+    Welcome back! John
+  </h2>
+  
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md fixed w-full z-20 top-0 lg:ml-64">
+    <div class="container mx-auto flex items-center justify-between lg:justify-around px-4 py-2">
+      <h1 class="text-2xl font-bold text-pink-500 hidden sm:block lg:block">Beauty Spa</h1>
+
+     
+      <div class="flex items-center space-x-4">
+        <!-- Search input (visible on all screens) -->
+        <input type="text" id="search" placeholder="Search..." class="px-4 py-2 border rounded-lg">
+      
+        <!-- Search icon button (visible only on small screens) -->
+        <button class="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 sm:hidden">
+          <i class="fas fa-search"></i>
+        </button>
+      
+        <!-- Search button (visible only on larger screens) -->
+        <button class="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 hidden sm:block">Search</button>
+      </div>
+      <ul class="list-none flex items-center space-x-4">
+        <li><a href="#" class="hidden lg:block hover:text-pink-500"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a></li>
+      </ul>
+      <button id="menu-btn" class="lg:hidden text-gray-700 focus:outline-none menu-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden bg-white shadow-md absolute top-full left-0 w-full z-10">
+      <ul class="space-y-2 px-4 py-2 text-gray-700">
+        <li><a href="#" class="hover:text-pink-500 block">Dashboard</a></li>
+        <li><a href="#" class="hover:text-pink-500 block">Appointments</a></li>
+        <li><a href="#" class="hover:text-pink-500 block">Services</a></li>
+        <li><a href="#" class="hover:text-pink-500 block">Profile</a></li>
+        <li><a href="#" class="hover:text-pink-500 block">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="flex mt-16">
+    <aside class="w-64 bg-gray-800 text-white fixed h-full lg:block shadow-md top-0 left-0 hidden lg:flex flex-col justify-between">
+        <!-- Header Section -->
+        <div>
+          <h2 class="text-2xl font-bold text-gray-800 border-b-2 text-center bg-white p-3">
+            Dashboard
+          </h2>
+          <ul class="space-y-4 p-4 text-gray-700 mt-12">
+            <li><a href="#" class="block hover:text-pink-500 text-2xl "><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a></li>
+            <li><a href="#" class="block hover:text-pink-500 text-2xl"><i class="fas fa-calendar-check mr-2"></i>Appointments</a></li>
+            <li><a href="#" class="block hover:text-pink-500 text-2xl"><i class="fas fa-cogs mr-2"></i>Services</a></li>
+            <li><a href="#" class="block hover:text-pink-500 text-2xl"><i class="fas fa-user-circle mr-2"></i>Profile</a></li>
+            <li>
+              <a href="#" class="block hover:text-pink-500 flex items-center text-2xl" id="logoutLink">
+                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      
+        <!-- Footer Section -->
+        <footer class="bg-gray-800 text-white py-6">
+          <div class="container mx-auto flex flex-col sm:flex-row justify-between px-4">
+            <!-- Left Section -->
+            <div class="text-left mb-4 sm:mb-0">
+              <p class="font-semibold text-lg">Beauty Spa</p>
+              <p>Providing the best services to relax and rejuvenate.</p>
+            </div>
+      
+            <!-- Social Media Icons -->
+            <div class="text-right space-x-4 flex justify-center sm:justify-end mb-4 sm:mb-0">
+              <a href="#" class="text-white hover:text-pink-500"><i class="fab fa-facebook"></i></a>
+              <a href="#" class="text-white hover:text-pink-500"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="text-white hover:text-pink-500"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="text-white hover:text-pink-500"><i class="fab fa-linkedin"></i></a>
+            </div>
+          </div>
+      
+          <!-- Additional Links (Terms and Privacy) -->
+          <div class="text-center mt-4">
+            <a href="#" class="text-white hover:text-pink-500 mr-6">Terms & Conditions</a>
+            <a href="#" class="text-white hover:text-pink-500">Privacy Policy</a>
+          </div>
+        </footer>
+      </aside>
+      
+
+    <!-- Main Content -->
+    <main class="flex-1 px-4 py-6 w-48 lg:w-full lg:ml-64 transition-all duration-300">
+
+      <!-- Dashboard Overview -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg shadow-md flex items-center">
+          <i class="fas fa-calendar-alt text-3xl text-pink-500 mr-4"></i>
+          <div>
+            <h2 class="text-xl font-semibold">Total Appointments</h2>
+            <p class="text-3xl font-bold mt-2">50</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md flex items-center">
+          <i class="fas fa-calendar-check text-3xl text-pink-500 mr-4"></i>
+          <div>
+            <h2 class="text-xl font-semibold">Upcoming Appointments</h2>
+            <p class="text-3xl font-bold mt-2">5</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md flex items-center">
+          <i class="fas fa-check-circle text-3xl text-pink-500 mr-4"></i>
+          <div>
+            <h2 class="text-xl font-semibold">Completed Appointments</h2>
+            <p class="text-3xl font-bold mt-2">45</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md flex items-center">
+          <i class="fas fa-dollar-sign text-3xl text-pink-500 mr-4"></i>
+          <div>
+            <h2 class="text-xl font-semibold">Total Sales</h2>
+            <p class="text-3xl font-bold mt-2">$5000</p>
+          </div>
+        </div>
+      </section>
+
+        <!-- Google Chart for Appointment Statistics -->
+<section class="bg-white p-6 rounded-lg shadow-md mb-8">
+    <h2 class="text-xl font-semibold mb-4">Appointment Statistics</h2>
+    <div id="piechart_3d" class="w-full h-64 sm:h-80 md:h-96"></div>
+  </section>
+  
+  <!-- Google Chart for Revenue Earned -->
+  <section class="bg-white p-6 rounded-lg shadow-md mb-8">
+    <h2 class="text-xl font-semibold mb-4">Revenue Earned</h2>
+    <div id="revenue_chart" class="w-full h-64 sm:h-80 md:h-96"></div>
+  </section>
+
+      <!-- Add Completed Appointment -->
+      <section class="bg-white p-6 rounded-lg shadow-md mb-8">
+        <h2 class="text-xl font-semibold mb-4">Add Completed Appointment/Service</h2>
+        <form action="#" method="POST">
+          <div class="mb-4">
+            <label for="clientName" class="block text-lg">Client Name</label>
+            <input type="text" id="clientName" name="clientName" class="mt-2 w-full p-2 border border-gray-300 rounded-md">
+          </div>
+          <div class="mb-4">
+            <label for="service" class="block text-lg">Service</label>
+            <select id="service" name="service" class="mt-2 w-full p-2 border border-gray-300 rounded-md">
+              <option value="facial">Facial</option>
+              <option value="massage">Massage</option>
+              <option value="haircut">Haircut</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label for="dateTime" class="block text-lg">Date & Time</label>
+            <input type="datetime-local" id="dateTime" name="dateTime" class="mt-2 w-full p-2 border border-gray-300 rounded-md">
+          </div>
+          <div class="mb-4">
+            <label for="amount" class="block text-lg">Amount</label>
+            <input type="text" id="clientamount" name="clientamount" class="mt-2 w-full p-2 border border-gray-300 rounded-md">
+          </div>
+          <div class="mb-4">
+            <label for="status" class="block text-lg">Status</label>
+            <select id="status" name="status" class="mt-2 w-full p-2 border border-gray-300 rounded-md">
+              <option value="completed">Completed</option>
+              <option value="pending">Pending</option>
+            </select>
+          </div>
+          <button type="submit" class="bg-pink-500 text-white px-6 py-2 rounded-lg">Submit</button>
+        </form>
+      </section>
+<!-- Appointments Table -->
+<section class="bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold mb-4">Upcoming Appointments</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="px-4 py-2 text-left border-b">Client Name</th>
+            <th class="px-4 py-2 text-left border-b">Service</th>
+            <th class="px-4 py-2 text-left border-b">Date & Time</th>
+            <th class="px-4 py-2 text-left border-b">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="px-4 py-2 border-b">Jane Doe</td>
+            <td class="px-4 py-2 border-b">Facial</td>
+            <td class="px-4 py-2 border-b">12/12/2024 10:00 AM</td>
+            <td class="px-4 py-2 border-b"><span class="bg-yellow-500 text-white px-2 py-1 rounded">Pending</span></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 border-b">John Smith</td>
+            <td class="px-4 py-2 border-b">Massage</td>
+            <td class="px-4 py-2 border-b">12/12/2024 2:00 PM</td>
+            <td class="px-4 py-2 border-b"><span class="bg-green-500 text-white px-2 py-1 rounded">Confirmed</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+   
+   <!-- Logout Confirmation Modal -->
+<div id="logoutModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+      <h3 class="text-xl font-semibold text-gray-800">Are you sure you want to log out?</h3>
+      <div class="mt-4 flex justify-between">
+        <button id="cancelLogout" class="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500">
+          Cancel
+        </button>
+        <button id="confirmLogout" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+    </div>
+    </main>
+  </div>
+  <!-- Footer -->
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-6 block lg:hidden">
+    <div class="container mx-auto flex flex-col sm:flex-row justify-between px-4">
+      <!-- Left Section -->
+      <div class="text-left mb-4 sm:mb-0">
+        <p class="font-semibold text-lg">Beauty Spa</p>
+        <p>Providing the best services to relax and rejuvenate.</p>
+      </div>
+  
+      <!-- Social Media Icons -->
+      <div class="text-right space-x-4 flex justify-center sm:justify-end mb-4 sm:mb-0">
+        <a href="#" class="text-white hover:text-pink-500"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="text-white hover:text-pink-500"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="text-white hover:text-pink-500"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="text-white hover:text-pink-500"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  
+    <!-- Additional Links (Terms and Privacy) -->
+    <div class="text-center mt-4">
+      <a href="#" class="text-white hover:text-pink-500 mr-6">Terms & Conditions</a>
+      <a href="#" class="text-white hover:text-pink-500">Privacy Policy</a>
+    </div>
+  </footer>
+  
+  
+
+  <script>
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+    google.charts.load('current', { 'packages': ['corechart'] });
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    // Appointment Statistics - Pie Chart (Example Data)
+    var appointmentData = google.visualization.arrayToDataTable([
+      ['Appointment Status', 'Percentage'],
+      ['Completed', 75],
+      ['Pending', 20],
+      ['Cancelled', 5]
+    ]);
+
+    var appointmentOptions = {
+      title: 'Appointment Statistics',
+      is3D: true,
+    };
+
+    var appointmentChart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    appointmentChart.draw(appointmentData, appointmentOptions);
+
+    // Revenue Earned - Bar Chart (Example Data)
+    var revenueData = google.visualization.arrayToDataTable([
+      ['Month', 'Revenue'],
+      ['January', 5000],
+      ['February', 8000],
+      ['March', 6500],
+      ['April', 9000],
+      ['May', 12000],
+      ['June', 14000],
+    ]);
+
+    var revenueOptions = {
+      title: 'Total Sales',
+      chartArea: { width: '50%' },
+      hAxis: {
+        title: 'Revenue',
+        minValue: 0
+      },
+      vAxis: {
+        title: 'Month'
+      }
+    };
+
+    var revenueChart = new google.visualization.BarChart(document.getElementById('revenue_chart'));
+    revenueChart.draw(revenueData, revenueOptions);
+  }
+   // Get modal and buttons
+   const logoutLink = document.getElementById('logoutLink');
+  const logoutModal = document.getElementById('logoutModal');
+  const cancelLogout = document.getElementById('cancelLogout');
+  const confirmLogout = document.getElementById('confirmLogout');
+
+  // Show modal when logout link is clicked
+  logoutLink.addEventListener('click', (e) => {
+    e.preventDefault(); // Prevent default link action
+    logoutModal.classList.remove('hidden');
+  });
+
+  // Close modal when cancel button is clicked
+  cancelLogout.addEventListener('click', () => {
+    logoutModal.classList.add('hidden');
+  });
+
+  // Perform logout action and close modal when confirm button is clicked
+  confirmLogout.addEventListener('click', () => {
+    alert('Logging out...');
+    window.location.href = '/login'; // Redirect to login page after logout
+  });
+
+  // Close modal if clicked outside
+  window.addEventListener('click', (e) => {
+    if (e.target === logoutModal) {
+      logoutModal.classList.add('hidden');
+    }
+  });
+  </script>
+</body>
+</html>

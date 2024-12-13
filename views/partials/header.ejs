@@ -1,0 +1,107 @@
+<header class="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white fixed z-10 top-0 w-full">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 py-6 flex justify-between items-center">
+    <!-- Logo Section -->
+    <a href="/" class="flex items-center gap-2">
+      <img src="/path/to/logo.png" alt="Beauty Spa Logo" class="h-10 w-10">
+      <span class="text-2xl font-semibold">Beauty Spa</span>
+    </a>
+
+    <!-- Navigation Links (Desktop) -->
+    <div class="hidden sm:flex gap-8">
+      <a href="/" class="flex flex-col items-center text-sm sm:text-base">
+        <i class="fas fa-home text-2xl"></i>
+        <span>Home</span>
+      </a>
+      <a href="/services" class="flex flex-col items-center text-sm sm:text-base">
+        <i class="fas fa-spa text-2xl"></i>
+        <span>Services</span>
+      </a>
+      <a href="/contact" class="flex flex-col items-center text-sm sm:text-base">
+        <i class="fas fa-envelope text-2xl"></i>
+        <span>Contact</span>
+      </a>
+      <a href="/appointments" class="flex flex-col items-center text-sm sm:text-base">
+        <i class="fas fa-calendar-alt text-2xl"></i>
+        <span>Appointments</span>
+      </a>
+      <a href="/notifications" class="flex flex-col items-center relative text-sm sm:text-base">
+        <i class="fas fa-bell text-2xl"></i>
+        <span>Notifications</span>
+        <!-- Loading Spinner -->
+        <div id="loading-spinner" class="absolute -top-1 -right-2 w-4 h-4 border-2 border-t-2 border-white border-solid rounded-full animate-spin hidden"></div>
+        <span id="notification-badge" class="absolute -top-1 -right-2 bg-red-600 text-white text-xs rounded-full px-1.5 sm:px-2 hidden">0</span>
+      </a>
+    </div>
+
+    <!-- Mobile Menu Toggle (Mobile View) -->
+    <button class="sm:hidden text-white" id="mobile-menu-toggle">
+      <i class="fas fa-bars text-2xl"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Menu (Hidden by default) -->
+  <div class="sm:hidden hidden bg-white text-black p-4" id="mobile-menu">
+    <a href="/" class="block py-2">Home</a>
+    <a href="/services" class="block py-2">Services</a>
+    <a href="/contact" class="block py-2">Contact</a>
+    <a href="/appointments" class="block py-2">Appointments</a>
+    <a href="/notifications" class="block py-2 relative">
+      Notifications
+      <div id="mobile-loading-spinner" class="absolute -top-2 -left-4 w-4 h-4 border-2 border-t-2 border-white border-solid rounded-full animate-spin hidden"></div>
+      <span id="mobile-notification-badge" class="absolute -top-2 -left-4 bg-red-600 text-white text-xs rounded-full px-2 hidden">0</span>
+    </a>
+  </div>
+</header>
+
+<script>
+  // Function to update notification badge from server
+  async function updateNotificationsBadge() {
+    try {
+      // Show the loading spinner
+      const loadingSpinner = document.querySelector("#loading-spinner");
+      const mobileLoadingSpinner = document.querySelector("#mobile-loading-spinner");
+      if (loadingSpinner) loadingSpinner.classList.remove("hidden");
+      if (mobileLoadingSpinner) mobileLoadingSpinner.classList.remove("hidden");
+
+      // Fetch unread notification count from server
+      const response = await fetch("/api/notifications/unread");
+      const { unreadCount } = await response.json();
+
+      // Hide the loading spinner
+      if (loadingSpinner) loadingSpinner.classList.add("hidden");
+      if (mobileLoadingSpinner) mobileLoadingSpinner.classList.add("hidden");
+
+      // Update the badge with unread count
+      const badgeElement = document.querySelector("#notification-badge");
+      const mobileBadgeElement = document.querySelector("#mobile-notification-badge");
+
+      if (badgeElement) {
+        badgeElement.textContent = unreadCount;
+        badgeElement.style.display = unreadCount > 0 ? "inline" : "none";
+      }
+      if (mobileBadgeElement) {
+        mobileBadgeElement.textContent = unreadCount;
+        mobileBadgeElement.style.display = unreadCount > 0 ? "inline" : "none";
+      }
+    } catch (error) {
+      console.error("Failed to update notifications badge:", error);
+    }
+  }
+
+  // Call the function on page load
+  document.addEventListener("DOMContentLoaded", updateNotificationsBadge);
+
+  // Optional: Periodic updates (e.g., every 60 seconds)
+  setInterval(updateNotificationsBadge, 60000);
+</script>
+
+<style>
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+</style>

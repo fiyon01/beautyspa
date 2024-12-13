@@ -1,0 +1,100 @@
+// Get the elements
+const saveChangesButton = document.getElementById('saveChangesButton');
+const loader = document.getElementById('loader');
+const buttonText = document.getElementById('buttonText');
+const form = document.getElementById('profileForm');
+
+// On form submit, show the loader and hide the button text
+form.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the form from submitting immediately for demo purpose
+
+  // Show loader, hide button text
+  loader.classList.remove('hidden');
+  buttonText.classList.add('hidden');
+
+  // Simulate a network request with a timeout (e.g., save to the server)
+  setTimeout(function() {
+    // Hide loader, show button text again after processing is complete
+    loader.classList.add('hidden');
+    buttonText.classList.remove('hidden');
+
+    // After the "processing" is done, you can submit the form, for example:
+    // form.submit(); // Uncomment this to actually submit the form after the demo
+  }, 3000); // Simulating a 3-second delay for demonstration
+});
+
+
+
+<div>
+    <button type="submit" id="saveChangesButton" class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition duration-300 relative">
+      <span id="buttonText">Save Changes</span>
+      <svg id="loader" class="absolute inset-0 w-6 h-6 mx-auto my-auto text-white animate-spin hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <circle cx="12" cy="12" r="10" stroke-width="4" stroke="currentColor" opacity="0.25" />
+        <path d="M4 12a8 8 0 1 1 16 0A8 8 0 0 1 4 12z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" />
+      </svg>
+    </button>
+
+
+
+     <!-- Logout Button -->
+     <div class="mt-6">
+        <button type="button" id="logoutButton" class="w-full py-3 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 transition duration-300">Logout</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div id="logoutModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+      <h3 class="text-xl font-semibold text-gray-800">Are you sure you want to log out?</h3>
+      <div class="mt-4 flex justify-between">
+        <button id="cancelLogout" class="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500">Cancel</button>
+        <button id="confirmLogout" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  // Get modal and buttons
+  const logoutButton = document.getElementById('logoutButton');
+  const logoutModal = document.getElementById('logoutModal');
+  const cancelLogout = document.getElementById('cancelLogout');
+  const confirmLogout = document.getElementById('confirmLogout');
+
+  // Show modal when logout button is clicked
+  logoutButton.addEventListener('click', () => {
+    logoutModal.classList.remove('hidden');
+  });
+
+  // Close modal when cancel button is clicked
+  cancelLogout.addEventListener('click', () => {
+    logoutModal.classList.add('hidden');
+  });
+
+  // Perform logout action and close modal when confirm button is clicked
+  confirmLogout.addEventListener('click', () => {
+    // Perform logout logic here (e.g., redirect to login page or clear session)
+    alert('Logging out...');
+    window.location.href = '/login'; // Redirect to login page after logout
+  });
+
+  // Close modal if clicked outside
+  window.addEventListener('click', (e) => {
+    if (e.target === logoutModal) {
+      logoutModal.classList.add('hidden');
+    }
+  });
+
+
+
+
+  CREATE TABLE appointments (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    service_id INT,
+    date DATE,
+    time TIME,
+    notes TEXT,
+    status ENUM('pending', 'confirmed', 'cancelled') DEFAULT 'pending'
+);

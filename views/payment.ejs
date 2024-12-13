@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-gray-100 min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white py-4">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Payment Page</h1>
+      <button onclick="history.back()" class="bg-gray-100 text-pink-600 px-4 py-2 rounded-md hover:bg-gray-200">Back</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="py-8 flex-grow">
+    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
+      <!-- Order Summary -->
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Order Summary</h2>
+        <div class="flex justify-between items-center text-gray-600">
+          <p>Service: Deluxe Spa Package</p>
+          <p class="font-semibold">00</p>
+        </div>
+        <div class="flex justify-between items-center text-gray-600 mt-2">
+          <p>VAT (0%)</p>
+          <p class="font-semibold">0.0</p>
+        </div>
+        <hr class="my-4">
+        <div class="flex justify-between items-center text-gray-800 font-bold">
+          <p id="deposit-display">Amount:<strong id="deposit-amount"></strong></p>
+        </div>
+      </section>
+
+      <!-- Payment Methods -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Choose Payment Method</h2>
+        <form id="payment-form" class="space-y-6" onsubmit="handlePayment(event)">
+          <!-- M-Pesa -->
+          <div>
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="payment_method" value="mpesa" class="form-radio h-5 w-5 text-pink-500" required>
+              <span class="text-gray-700">M-Pesa</span>
+            </label>
+          </div>
+
+          <!-- Credit/Debit Card -->
+          <div>
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="payment_method" value="card" class="form-radio h-5 w-5 text-pink-500" required>
+              <span class="text-gray-700">Credit/Debit Card</span>
+            </label>
+          </div>
+
+          <!-- PayPal -->
+          <div>
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="payment_method" value="paypal" class="form-radio h-5 w-5 text-pink-500" required>
+              <span class="text-gray-700">PayPal</span>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="w-full bg-pink-500 text-white px-6 py-3 rounded-md hover:bg-pink-600">Proceed to Pay</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-4 mt-auto">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 text-center">
+      <p>&copy; 2024 Beauty Bliss Spa. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div id="mpesa-modal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white rounded-lg shadow-lg w-96 p-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Enter M-Pesa Details</h2>
+      <form id="mpesa-form" onsubmit="submitMpesaPayment(event)">
+        <div class="mb-4">
+          <label for="phone" class="block text-gray-700 mb-2">Phone Number</label>
+          <input type="tel" id="phone" name="phone" class="w-full border rounded-lg p-2" required placeholder="e.g., +254712345678">
+        </div>
+        <div class="mb-4">
+          <label for="amount" class="block text-gray-700 mb-2">Amount</label>
+          <input type="number" id="amount" name="amount" class="w-full border rounded-lg p-2" value="115" readonly>
+        </div>
+        <div class="flex justify-end space-x-4">
+          <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600">Pay</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function handlePayment(event) {
+      event.preventDefault();
+      const selectedMethod = document.querySelector('input[name="payment_method"]:checked').value;
+
+      if (selectedMethod === 'mpesa') {
+        openModal();
+      } else if (selectedMethod === 'card') {
+        handleCardPayment();
+      } else if (selectedMethod === 'paypal') {
+        redirectToPayPal();
+      } else {
+        alert('Please select a valid payment method.');
+      }
+    }
+
+    function openModal() {
+      document.getElementById('mpesa-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('mpesa-modal').classList.add('hidden');
+    }
+
+    function submitMpesaPayment(event) {
+      event.preventDefault();
+      const phone = document.getElementById('phone').value;
+
+      alert(`Payment initiated for phone number: ${phone}`);
+      window.location.href="/services";
+      closeModal();
+    }
+
+    function handleCardPayment() {
+      const cardDetails = prompt('Enter your card details (Card Number, Expiry Date, CVV):');
+      if (cardDetails) {
+        alert('Card payment processed successfully!');
+      }
+    }
+
+    function redirectToPayPal() {
+      window.location.href = 'https://www.paypal.com/checkout';
+    }
+
+    // Function to extract URL parameters
+    function getUrlParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // Extract the appointmentId and deposit from the URL
+    const appointmentId = getUrlParameter('appointmentId');
+    const deposit = getUrlParameter('deposit');
+
+    // Display the deposit amount on the page
+    if (deposit) {
+      document.getElementById('deposit-amount').textContent = `Ksh ${deposit}`;
+    } else {
+      document.getElementById('deposit-display').textContent = 'No deposit amount found.';
+    }
+
+    // Optionally, you can use the appointmentId for further processing, like showing appointment details or processing payment
+    console.log(`Appointment ID: ${appointmentId}, Deposit: ${deposit}`);
+  </script>
+</body>
+</html>
